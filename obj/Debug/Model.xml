@@ -229,6 +229,107 @@
 			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="7" />
 		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[uspAddWarehouse]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO [dbo].[Warehouse] ([WarehouseName], [Location])
+    VALUES (@WarehouseName, @Location);
+
+    SET @WarehouseID = CONVERT(INT, SCOPE_IDENTITY());
+END;]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Warehouse]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Warehouse].[WarehouseName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Warehouse].[Location]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[uspAddWarehouse].[@WarehouseName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[uspAddWarehouse].[@Location]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[uspAddWarehouse].[@WarehouseID]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[uspAddWarehouse].[@WarehouseName]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="100" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[uspAddWarehouse].[@Location]">
+						<Property Name="DefaultExpressionScript">
+							<Value><![CDATA[NULL]]></Value>
+						</Property>
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="200" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[uspAddWarehouse].[@WarehouseID]">
+						<Property Name="IsOutput" Value="True" />
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="345" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[uspAddWarehouse]&#xD;&#xA;    @WarehouseName NVARCHAR(100),&#xD;&#xA;    @Location NVARCHAR(200) = NULL,&#xD;&#xA;    @WarehouseID INT OUTPUT&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
 		<Element Type="SqlProcedure" Name="[dbo].[uspLogInventoryChange]">
 			<Property Name="BodyScript">
 				<Value><![CDATA[
