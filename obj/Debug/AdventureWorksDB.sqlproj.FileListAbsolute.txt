@@ -1,1 +1,6 @@
 C:\Users\dell\AdventureWorksDB\bin\Debug\AdventureWorksDB.dacpac
+C:\Users\dell\AdventureWorksDB\obj\Debug\Model.xml
+C:\Users\dell\AdventureWorksDB\obj\Debug\refactor.xml
+C:\Users\dell\AdventureWorksDB\obj\Debug\postdeploy.sql
+C:\Users\dell\AdventureWorksDB\obj\Debug\predeploy.sql
+C:\Users\dell\AdventureWorksDB\obj\Debug\preplan.sql
