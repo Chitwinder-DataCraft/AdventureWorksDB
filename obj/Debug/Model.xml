@@ -64,6 +64,22 @@
 			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="4" />
 		</Element>
+		<Element Type="SqlDefaultConstraint" Name="[dbo].[DF_Warehouse_CreatedAt]">
+			<Property Name="DefaultExpressionScript">
+				<Value><![CDATA[SYSUTCDATETIME()]]></Value>
+			</Property>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Warehouse]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForColumn">
+				<Entry>
+					<References Name="[dbo].[Warehouse].[CreatedAt]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="5" />
+		</Element>
 		<Element Type="SqlTable" Name="[dbo].[InventoryLog]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="Columns">
@@ -175,6 +191,44 @@
 				</Entry>
 			</Relationship>
 		</Element>
+		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_Warehouse]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Warehouse].[WarehouseID]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Warehouse]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="6" />
+		</Element>
+		<Element Type="SqlUniqueConstraint" Name="[dbo].[UQ_Warehouse_WarehouseName]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[Warehouse].[WarehouseName]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[Warehouse]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="7" />
+		</Element>
 		<Element Type="SqlProcedure" Name="[dbo].[uspLogInventoryChange]">
 			<Property Name="BodyScript">
 				<Value><![CDATA[
@@ -267,6 +321,85 @@
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value=" CREATE PROCEDURE [dbo].[uspLogInventoryChange]&#xD;&#xA;     @ProductID INT,&#xD;&#xA;     @QuantityChange INT,&#xD;&#xA;     @ChangeType NVARCHAR(20)&#xD;&#xA; AS" />
 			</Annotation>
+		</Element>
+		<Element Type="SqlTable" Name="[dbo].[Warehouse]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Warehouse].[WarehouseID]">
+						<Property Name="IsNullable" Value="False" />
+						<Property Name="IsIdentity" Value="True" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Warehouse].[WarehouseName]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="100" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Warehouse].[Location]">
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="200" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[nvarchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Warehouse].[CreatedAt]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[datetime2]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+						<AttachedAnnotation Disambiguator="5" />
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="6" />
+			<AttachedAnnotation Disambiguator="7" />
 		</Element>
 	</Model>
 </DataSchemaModel>
